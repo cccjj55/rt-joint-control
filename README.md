@@ -8,6 +8,18 @@
 
 ---
 
+## 结果一览 / At a glance
+
+| 项 | 现在 |
+| --- | --- |
+| 帧格式 | `0xAA55` + seq + cmd + len + payload + CRC-16/CCITT-FALSE；CRC 覆盖 seq，可识别重复/乱序帧 |
+| 容错 | 接收端逐字节重同步：一帧坏掉不会废掉整条串流（单测覆盖垃圾前缀与截断尾帧） |
+| 测试 | 9 个单测：往返、CRC 失败、非法长度、流式重同步、frozen dataclass |
+| 度量 | `tools/jitter_report.py` 从原始 CSV 复算 jitter P50/P90/P99 与周期标准差 |
+| 待补 | STM32 1 kHz 双环固件、逻辑分析仪测点、CFS / SCHED_FIFO / PREEMPT_RT 三配置实测、端到端时延四段 |
+
+---
+
 ## 目录 / Layout
 
 ```
